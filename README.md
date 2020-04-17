@@ -1,6 +1,6 @@
 # udemy-nuxt-project
 
-> My astounding Nuxt.js project
+> 讀書心得：https://hackmd.io/l23CT8W6TsiXT5AX-91NPg
 
 ## Build Setup
 
