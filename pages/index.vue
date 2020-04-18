@@ -3,7 +3,7 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <PostList :posts="loadPosts"/>
+    <PostList :posts="loadedPosts"/>
   </div>
 </template>
 
@@ -13,15 +13,24 @@ export default {
     components: {
         PostList,
     },
-    data() {
-      return {
-        loadPosts: [
-          { id: '1', titie: 'Post 1', previewText: 'Post 1', thumbnail: 'https://lorempixel.com/400/200/cats/1'},
-          { id: '2', titie: 'Post 2', previewText: 'Post 2', thumbnail: 'https://lorempixel.com/400/200/cats/2'},
-          { id: '3', titie: 'Post 3', previewText: 'Post 3', thumbnail: 'https://lorempixel.com/400/200/cats/3'},
-        ],
-      };
+    asyncData(context, callback) {
+      setTimeout(() => {
+        callback(null, {
+          loadedPosts:[
+            { id: '1', title: 'Post 1', previewText: 'Post 1', thumbnail: 'https://lorempixel.com/400/200/cats/1'},
+            { id: '2', title: 'Post 2', previewText: 'Post 2', thumbnail: 'https://lorempixel.com/400/200/cats/2'},
+            { id: '3', title: 'Post 3', previewText: 'Post 3', thumbnail: 'https://lorempixel.com/400/200/cats/3'},
+          ]
+        });        
+      }, 1000);
     },
+    // data() {
+    //   return {
+    //     loadedPosts: [],
+    //   };
+    // },
+    created() {
+    }
 };
 </script>
 
