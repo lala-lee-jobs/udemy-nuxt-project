@@ -14,15 +14,16 @@ import PostList from '@/components/Posts/PostList';
 import AppButton from '@/components/UI/AppButton';
 
 export default {
-    components: {
-        PostList,
-        AppButton,
+  layout:'admin',
+  components: {
+      PostList,
+      AppButton,
+  },
+  methods: {
+    onCreate() {
+      this.$router.push('/admin/new-post');
     },
-    methods: {
-      onCreate() {
-        this.$router.push('/admin/new-post');
-      },
-    },
+  },
 };
 </script>
 
