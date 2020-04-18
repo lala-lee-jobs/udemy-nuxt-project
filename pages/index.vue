@@ -24,13 +24,6 @@ export default {
         });        
       }, 1000);
     },
-    // data() {
-    //   return {
-    //     loadedPosts: [],
-    //   };
-    // },
-    created() {
-    }
 };
 </script>
 
