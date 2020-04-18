@@ -27,6 +27,9 @@ export default {
           context.error(error);
       });
     },
+    created() {
+      this.$store.dispatch('setPosts', this.loadedPosts);
+    },
 };
 </script>
 <style scoped>
