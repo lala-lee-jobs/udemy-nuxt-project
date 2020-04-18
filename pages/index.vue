@@ -3,33 +3,16 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <div class="featured-posts">
-      <PostPreview 
-        id="1" 
-        thumbnail="https://lorempixel.com/400/200/cats/1" 
-        title="First" 
-        previewText="First post"/>
-      <PostPreview 
-        id="2" 
-        thumbnail="https://lorempixel.com/400/200/cats/2" 
-        title="Second" 
-        previewText="Second post"/>
-      <PostPreview 
-        id="3" 
-        thumbnail="https://lorempixel.com/400/200/cats/3" 
-        title="Third" 
-        previewText="Third post"/>
-    </div>
+    <PostList />
   </div>
 </template>
 
 <script>
-import PostPreview from '@/components/Posts/PostPreview';
-
+import PostList from '@/components/Posts/PostList';
 export default {
-  components:{
-    PostPreview,
-  },
+    components: {
+        PostList,
+    },
 };
 </script>
 
@@ -63,14 +46,5 @@ export default {
   .intro h1 {
     font-size: 2rem;
   }
-}
-
-.featured-posts {
-  display: flex;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 </style>
