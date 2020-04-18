@@ -11,7 +11,7 @@ export default {
     },
     asyncData(context, callback) {
       setTimeout(() => {
-        callback(null, {
+        callback(new Error(), {
           loadedPosts:[
             { id: '1', title: 'Post 1', previewText: 'Post 1', thumbnail: 'https://lorempixel.com/400/200/cats/1'},
             { id: '2', title: 'Post 2', previewText: 'Post 2', thumbnail: 'https://lorempixel.com/400/200/cats/2'},
