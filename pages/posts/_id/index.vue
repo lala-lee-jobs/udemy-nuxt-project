@@ -1,12 +1,12 @@
 <template>
     <div class="single-post-page">
         <section class="post">
-            <h1 class="post-title">Title of the Post</h1>
+            <h1 class="post-title">{{loadedPost.title}}</h1>
             <div class="post-details">
-                <div class="post-detail">Last updated on XXX</div>
-                <div class="post-detail">Written by Name</div>
+                <div class="post-detail">Last updated on {{loadedPost.updatedDate}}</div>
+                <div class="post-detail">Written by {{loadedPost.author}}</div>
             </div>
-            <p class="post-content">Content of the post</p>
+            <p class="post-content">{{loadedPost.content}}</p>
         </section>
         <div class="post-feedback">
             <p>
@@ -16,6 +16,25 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: { 
+          id: '1',
+          title: `Some Post (route.params.id:${context.route.params.id})`,
+          previewText: 'Post Preview',
+          thumbnail: 'https://lorempixel.com/400/200/cats/1',
+          updatedDate: new Date(),
+          author: 'lala',
+          content: 'Dummy Content'
+        },
+      });
+    }, 1000);    
+  },
+};
+</script>
 <style scoped>
 .single-post-page {
   padding: 30px;
