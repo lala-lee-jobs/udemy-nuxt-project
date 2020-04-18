@@ -9,8 +9,8 @@
   </form>
 </template>
 <script>
-import AppControlInput from '@/components/UI-Components/AppControlInput';
-import AppButton from '@/components/UI-Components/AppButton';
+import AppControlInput from '@/components/UI/AppControlInput';
+import AppButton from '@/components/UI/AppButton';
 export default {
   components: {
       AppControlInput,

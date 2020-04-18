@@ -1,7 +1,7 @@
 <template>
     <div class="admin-page">
         <section class="new-post">
-            <button @click="onCreate">Create Post</button>
+            <AppButton  @click="onCreate">Create Post</AppButton>
         </section>
         <section class="existing-posts">
             <h1>Existing Posts</h1>
@@ -11,10 +11,12 @@
 </template>
 <script>
 import PostList from '@/components/Posts/PostList';
+import AppButton from '@/components/UI/AppButton';
 
 export default {
     components: {
-        PostList
+        PostList,
+        AppButton,
     },
     methods: {
       onCreate() {
