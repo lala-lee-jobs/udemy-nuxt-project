@@ -9,7 +9,7 @@ export default {
     components: {
         PostList,
     },
-    asyncData(context) {
+    fetch(context) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve({
@@ -22,13 +22,15 @@ export default {
         // reject(new Error());        
         }, 1000);
       }).then((data) => {
-          return data;
+          context.store.commit('setPosts', data.loadedPosts);
       }).catch((error) => {
           context.error(error);
       });
     },
-    created() {
-      this.$store.dispatch('setPosts', this.loadedPosts);
+    computed: {
+      loadedPosts() {
+        return this.$store.getters.loadedPosts;
+      },
     },
 };
 </script>
