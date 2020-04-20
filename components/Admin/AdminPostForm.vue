@@ -24,8 +24,8 @@ export default {
   },
   data() {
       return {
-          editedPost: this.post 
-            ? { ...this.post} 
+          editedPost: this.post
+            ? { ...this.post}
             : {
               auth: '',
               title: '',
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
       onSave() {
-          console.log('editedPost', this.editedPost);
+          this.$emit('submit', this.editedPost);
       },
       onCancel() {
           this.$router.push('/admin');
