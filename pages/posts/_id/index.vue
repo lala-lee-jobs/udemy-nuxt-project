@@ -17,21 +17,18 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: { 
-          id: '1',
-          title: `Some Post (route.params.id:${context.route.params.id})`,
-          previewText: 'Post Preview',
-          thumbnail: 'https://lorempixel.com/400/200/cats/1',
-          updatedDate: new Date(),
-          author: 'lala',
-          content: 'Dummy Content'
-        },
-      });
-    }, 1000);    
+  asyncData(context) {
+    const { id } = context.params;
+    return axios
+      .get(`https://udemy-nuxt-demo.firebaseio.com/posts/${id}.json`)
+      .then((res) => {
+        return {
+          loadedPost : res.data,
+        };
+      }).catch(e => context.error(e));
   },
 };
 </script>
