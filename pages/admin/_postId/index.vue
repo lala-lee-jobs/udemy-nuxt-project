@@ -20,19 +20,15 @@ export default {
       .get(`https://udemy-nuxt-demo.firebaseio.com/posts/${postId}.json`)
       .then((res) => {
         return {
-          loadedPost : res.data,
+          loadedPost : {...res.data, id: postId},
         };
       }).catch(e => context.error(e));
   },
   methods: {
     onSubmitted(editedPost) {
-      const { postId } = this.$route.params;
-      axios
-        .put(`https://udemy-nuxt-demo.firebaseio.com/posts/${postId}.json`, editedPost)
-        .then(res => {
-          this.$router.push('/admin');
-        })
-        .catch(e => console.log(e));
+      this.$store.dispatch('editPost', editedPost).then(() => {
+        this.$router.push('/admin');
+      });
     }
   },
 };

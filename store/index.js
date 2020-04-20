@@ -10,6 +10,14 @@ const createStore = () => {
             setPosts(state, posts) {
                 state.loadedPosts = posts;
             },
+            addPost(state, post) {
+              state.loadedPosts.push(post);
+            },
+
+            editPost(state, editedPost) {
+              const postIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id);
+              state.loadedPosts[postIndex] = editedPost;
+            },
         },
         actions: {
             nuxtServerInit(vueContext, context) {
@@ -26,6 +34,24 @@ const createStore = () => {
             setPosts(vueContext, posts) {
                 vueContext.commit('setPosts', posts);
             },
+            addPost(vueContext, post) {
+              const createdPost = {
+                ...post,
+                updatedDate: new Date(),
+              };
+              return axios.post('https://udemy-nuxt-demo.firebaseio.com/posts.json', createdPost)
+              .then(res => {
+                vueContext.commit('addPost', {...createdPost, id: res.data.name});
+              })
+              .catch(e => console.log(e));
+            },
+            editPost(vueContext, editedPost) {
+              return axios.put(`https://udemy-nuxt-demo.firebaseio.com/posts/${editedPost.id}.json`, editedPost)
+              .then(res => {
+                vueContext.commit('editPost', editedPost);
+              })
+              .catch(e => console.log(e));
+            }
         },
         getters: {
             loadedPosts(state) {
