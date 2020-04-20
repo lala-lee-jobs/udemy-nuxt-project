@@ -30,7 +30,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    "~plugins/core-componets.js"
+    "~plugins/core-componets.js",
+    "~plugins/date-filter.js"
   ],
   /*
   ** Nuxt.js dev-modules
