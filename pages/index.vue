@@ -8,11 +8,7 @@
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList';
 export default {
-    components: {
-        PostList,
-    },
     asyncData(context, callback) {
       console.log('asyncData', context);
       setTimeout(() => {
