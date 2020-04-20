@@ -49,5 +49,8 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://udemy-nuxt-demo.firebaseio.com'
+  },
 }

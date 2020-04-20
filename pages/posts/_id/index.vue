@@ -23,7 +23,7 @@ export default {
   asyncData(context) {
     const { id } = context.params;
     return axios
-      .get(`https://udemy-nuxt-demo.firebaseio.com/posts/${id}.json`)
+      .get(`${process.env.baseUrl}/posts/${id}.json`)
       .then((res) => {
         return {
           loadedPost : res.data,
