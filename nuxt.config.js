@@ -28,6 +28,7 @@ export default {
   ],
   /*
   ** Plugins to load before mounting the App
+  ** Component,Filter
   */
   plugins: [
     "~plugins/core-componets.js",
@@ -42,7 +43,11 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    "@nuxtjs/axios",
   ],
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://udemy-nuxt-demo.firebaseio.com'
+  },
   /*
   ** Build configuration
   */
