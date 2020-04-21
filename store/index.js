@@ -4,6 +4,7 @@ const createStore = () => {
     return new Vuex.Store({
         state: {
             loadedPosts: [],
+            token: null,
         },
         mutations: {
             setPosts(state, posts) {
@@ -12,10 +13,12 @@ const createStore = () => {
             addPost(state, post) {
               state.loadedPosts.push(post);
             },
-
             editPost(state, editedPost) {
               const postIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id);
               state.loadedPosts[postIndex] = editedPost;
+            },
+            setToken(state, token) {
+              state.token = token;
             },
         },
         actions: {
@@ -50,7 +53,23 @@ const createStore = () => {
                 vueContext.commit('editPost', editedPost);
               })
               .catch(e => console.log(e));
-            }
+            },
+            authenticateUser(vueContext, authData) {
+              // https://firebase.google.com/docs/reference/rest/auth
+              let authURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`;
+              if(!authData.isLogin) {
+                authURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`;
+              }
+              return this.$axios.$post(authURL, {
+                email: authData.email,
+                password: authData.password,
+                returnSecureToken: true
+              }).then((result) => {
+                vueContext.commit('setToken', result.idToken);
+              }).catch((e) => {
+                console.log(e);
+              });
+            },
         },
         getters: {
             loadedPosts(state) {

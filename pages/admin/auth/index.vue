@@ -28,21 +28,14 @@ export default {
   },
   methods: {
     onSubmit() {
-      // https://firebase.google.com/docs/reference/rest/auth
-      let authURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`;
-      if(!this.isLogin) {
-        authURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`;
-      }
-      this.$axios.$post(authURL, {
+      this.$store.dispatch('authenticateUser', {
+        isLogin: this.isLogin,
         email: this.email,
         password: this.password,
-        returnSecureToken: true
-      }).then((result) => {
-        console.log(result);
-      }).catch((e) => {
-        console.log(e);
+      }).then(() => {
+        this.$router.push('/admin');
       });
-    }
+    },
   },
 }
 </script>
