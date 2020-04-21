@@ -2,6 +2,7 @@
     <div class="admin-page">
         <section class="new-post">
             <AppButton  @click="onCreate">Create Post</AppButton>
+            <AppButton  @click="onLogout" style="margin-left: 10px;">Logout</AppButton>
         </section>
         <section class="existing-posts">
             <h1>Existing Posts</h1>
@@ -21,6 +22,10 @@ export default {
   methods: {
     onCreate() {
       this.$router.push('/admin/new-post');
+    },
+    onLogout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/admin/admit');
     },
   },
 };
