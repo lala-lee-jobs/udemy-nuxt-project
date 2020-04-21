@@ -72,21 +72,15 @@ const createStore = () => {
                 returnSecureToken: true
               }).then((result) => {
                 const { idToken } = result;
-                const expirationDate = new Date().getTime() + result.expiresIn * 1000;
+                const expirationDate = new Date().getTime() + Number.parseInt(result.expiresIn) * 1000;
                 vueContext.commit('setToken', idToken);
                 localStorage.setItem('token', idToken);
                 localStorage.setItem('tokenExpiration', expirationDate);
                 Cookie.set('jwt', idToken);
                 Cookie.set('expirationDate', expirationDate);
-                vueContext.dispatch('setLogoutTimer', result.expiresIn * 1000);
               }).catch((e) => {
                 console.log(e);
               });
-            },
-            setLogoutTimer(vueContext, duration) {
-              setTimeout(() => {
-                vueContext.commit('clearToken');
-              }, duration);
             },
             initAuth(vueContext, req) {
               let token;
@@ -108,10 +102,11 @@ const createStore = () => {
                 token = localStorage.getItem('token');
                 expirationDate = localStorage.getItem('tokenExpiration');
                 if (new Date().getTime() > +expirationDate || !token) {
+                  console.log('No token or invalid token');
+                  vueContext.commit('clearToken');
                   return;
                 }
               }
-              vueContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime());
               vueContext.commit('setToken', token);
             }
         },
