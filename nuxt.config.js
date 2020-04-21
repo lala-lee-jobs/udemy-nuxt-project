@@ -59,13 +59,14 @@ export default {
     }
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://udemy-nuxt-demo.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://udemy-nuxt-demo.firebaseio.com',
+    fbAPIKey: 'AIzaSyDSISrGSKY3K-H10Zvp45vycItbNfrQwKI',
   },
   transition: {
     name: 'fade',
     mode: 'out-in',
   },
-  router: {
-    middleware: 'log',
-  }
+  // router: {
+  //   middleware: 'log',
+  // }
 }
