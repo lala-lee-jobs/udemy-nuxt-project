@@ -70,7 +70,10 @@ const createStore = () => {
                 password: authData.password,
                 returnSecureToken: true
               }).then((result) => {
-                vueContext.commit('setToken', result.idToken);
+                const { idToken } = result;
+                vueContext.commit('setToken', idToken);
+                localStorage.setItem('token', idToken);
+                localStorage.setItem('tokenExpiration', new Date().getTime() + result.expiresIn * 1000);
                 vueContext.dispatch('setLogoutTimer', result.expiresIn * 1000);
               }).catch((e) => {
                 console.log(e);
@@ -80,6 +83,14 @@ const createStore = () => {
               setTimeout(() => {
                 vueContext.commit('clearToken');
               }, duration);
+            },
+            initAuth(vueContext) {
+              const token = localStorage.getItem('token');
+              const expirationDate = localStorage.getItem('tokenExpiration');
+              if (new Date() > expirationDate || !token) {
+                return;
+              }
+              vueContext.commit('setToken', token);
             }
         },
         getters: {
