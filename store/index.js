@@ -41,14 +41,16 @@ const createStore = () => {
                 ...post,
                 updatedDate: new Date(),
               };
-              return this.$axios.$post(`/posts.json`, createdPost)
+              const { token } = vueContext.state;
+              return this.$axios.$post(`/posts.json?auth=${token}`, createdPost)
               .then(data => {
                 vueContext.commit('addPost', {...createdPost, id: data.name});
               })
               .catch(e => console.log(e));
             },
             editPost(vueContext, editedPost) {
-              return this.$axios.$put(`/posts/${editedPost.id}.json`, editedPost)
+              const { token } = vueContext.state;
+              return this.$axios.$put(`/posts/${editedPost.id}.json?auth=${token}`, editedPost)
               .then(data => {
                 vueContext.commit('editPost', editedPost);
               })
